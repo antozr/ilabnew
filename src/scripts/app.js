@@ -31,8 +31,9 @@ document.querySelector('.nav__button').addEventListener('click', () => {
     console.log(store.getState());
     const user = store.getState().user;
     console.table(user.user);
-    
-    
+
+
+
 
 });
 
