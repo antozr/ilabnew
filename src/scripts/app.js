@@ -1,26 +1,50 @@
 console.info('Hello world');
 
-
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import loginMethod from '../scripts/components/login';
+import { auth } from './firebase';
+import { login, logout, selectUser } from './storeManage/userStore';
+import { store } from '../app/store';
 
 document.querySelector('#clickme').addEventListener('click', () => {
-    console.log('hello');
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            console.log(result.user.email);
-            const user = result.user;
-            localStorage.setItem('user', JSON.stringify(user));
-            return user;
+    loginMethod();
+    console.log('ta merer');
+    onAuthStateChanged(auth, (autUser) => {
+        console.log('L\'utilisateur est : ' + autUser);
+        if (autUser) {
+            console.log(autUser.email);
+            store.dispatch(
+                login({
+                    uid: autUser.uid,
+                    photo: autUser.photoURL,
+                    email: autUser.email,
+                    displayName: autUser.displayName
+                })
+            )
+            console.log(autUser.email);
+        } else {
+            store.dispatch(
+                logout()
+            )
+}
+    })
+bindEmail();
 
-        })
-        .catch((error) => alert(error.message));
-    console.log(JSON.parse(localStorage.getItem('user')));
-
-    console.table(user)
-    document.querySelector('#spane').innerHTML = user.email;
-    document.querySelector('.nav__name').innerHTML = user.displayName;
+console.log(store.getState());
+const user = store.getState().user;
+console.table(user.user);
+setTimeout(()=>{
+    if (user.user != null){
+        console.log(user.user.email);
+    }
+}, 200)
 
 });
+
+function bindEmail() {
+    const user = selectUser
+    document.querySelector('.nav__name').innerHTML = user.email;
+}
+
 
 /// initialiser les stores de redux pour faire la gesstion avec firebase ainsi que la récupérations des données. 
