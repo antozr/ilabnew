@@ -6,11 +6,9 @@ import { auth } from './firebase';
 import { login, logout, selectUser } from './storeManage/userStore';
 import { store } from '../app/store';
 
-document.querySelector('#clickme').addEventListener('click', () => {
+document.querySelector('.nav__button').addEventListener('click', () => {
     loginMethod();
-    console.log('ta merer');
     onAuthStateChanged(auth, (autUser) => {
-        console.log('L\'utilisateur est : ' + autUser);
         if (autUser) {
             console.log(autUser.email);
             store.dispatch(
@@ -26,25 +24,21 @@ document.querySelector('#clickme').addEventListener('click', () => {
             store.dispatch(
                 logout()
             )
-}
+        }
     })
-bindEmail();
 
-console.log(store.getState());
-const user = store.getState().user;
-console.table(user.user);
-setTimeout(()=>{
-    if (user.user != null){
-        console.log(user.user.email);
-    }
-}, 200)
+
+    console.log(store.getState());
+    const user = store.getState().user;
+    console.table(user.user);
+    
+    
 
 });
 
-function bindEmail() {
-    const user = selectUser
-    document.querySelector('.nav__name').innerHTML = user.email;
-}
 
 
 /// initialiser les stores de redux pour faire la gesstion avec firebase ainsi que la récupérations des données. 
+
+/* todo list */
+/// problème de refresh des données 

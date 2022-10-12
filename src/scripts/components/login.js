@@ -9,16 +9,10 @@ export default function loginMethod() {
         .then((result) => {
             console.log(result.user);
             const user = result
-
+            //injecter la function pour les data ici 
+            document.querySelector('.nav__el--name').innerHTML = user.user.displayName;
         })
         .catch((error) => alert(error.message));
-    //console.log(JSON.parse(localStorage.getItem('user')));
-
-    //console.table(user)
-    // document.querySelector('#spane').innerHTML = user.email;
-    // document.querySelector('.nav__name').innerHTML = user.displayName;
-
-
 }
 
 
