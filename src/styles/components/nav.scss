@@ -51,4 +51,10 @@
         }
 
     }
+    &__profil{
+        display: flex;
+        flex-direction: row;
+        width: 200px;
+        column-gap: 8px;
+    }
 }
