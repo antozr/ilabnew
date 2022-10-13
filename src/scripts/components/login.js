@@ -16,10 +16,18 @@ export default function loginMethod() {
         .catch((error) => alert(error.message));
 }
 
+// faire une fonction signOut et la lier au statut du btn 
+
+
+
 function changeBtnConnection(user) {
     if (user.user != null) {
         let btnConnection = document.querySelector('.nav__button');
         btnConnection.innerHTML = "Se déconnecter";
         btnConnection.classList.add('nav__button--logout');
+    }else{
+        let btnConnection = document.querySelector('.nav__button');
+        btnConnection.innerHTML = "Se connecter";
+        btnConnection.classList.remove('nav__button--logout');
     }
 }
