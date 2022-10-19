@@ -11,10 +11,13 @@ export const userDataSlice = createSlice({
     reducers:{
         profil :(state, action) =>{
             state.dataUser = action.payload;
+        },
+        dataJob : (state, action) =>{
+            state.dataUser = action.payload;
         }
 
     }
 });
 
-export const {profil} = userDataSlice.actions;
+export const {profil, dataJob} = userDataSlice.actions;
 export default userDataSlice.reducer; 

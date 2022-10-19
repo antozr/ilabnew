@@ -17,13 +17,53 @@
 <body>
 
   <nav class="nav">
+    <div class="nav__logo">
+      <img src="./assets/images/svgicon/logo.svg" alt="symbiose, un projet ou vos choix on un impacte sur le destin de tous. " class="nav__logoimg">
+      <p class="nav__logoTxt">
+        Symbiose
+      </p>
+    </div>
+    <ul class="nav__range">
+      <li class="nav__rangeBox">
+        <p class="nav__txt nav__txt--range">
+          Nouriture
+        </p>
+        <div class="nav__rangeIn">
+          <div class="nav__rangeINto" title="bouffe"></div>
+        </div>
+      </li>
+      <li class="nav__rangeBox">
+        <p class="nav__txt nav__txt--range">
+          Matériau
+        </p>
+        <div class="nav__rangeIn">
+          <div class="nav__rangeINto" title="materiaux"></div>
+        </div>
+      </li>
+      <li class="nav__rangeBox">
+        <p class="nav__txt nav__txt--range">
+          Bonheur
+        </p>
+        <div class="nav__rangeIn">
+          <div class="nav__rangeINto" title="satisfaction"></div>
+        </div>
+      </li>
+      <li class="nav__rangeBox">
+        <p class="nav__txt nav__txt--range">
+          Argent
+        </p>
+        <div class="nav__rangeIn">
+          <div class="nav__rangeINto" title="argent"></div>
+        </div>
+      </li>
+    </ul>
     <ul class="nav__list">
       <li class="nav__el">
         <button class="nav__button">
           Connecte toi
         </button>
       </li>
-      <li class="nav__el">
+      <li class="nav__el nav__el--none" id="profilBox">
         Ton profile :&nbsp; <span class="nav__el--name"></span>
         <div class="nav__profil">
           <img src="./assets/images/svgicon/svgicon.svg" alt="icon d'une personne, pour représenter ton profil" class="navProfil__img">
@@ -35,7 +75,7 @@
             </li>
             <li class="navProfil__el">
               <p class="navProfil__txt">
-                Classe : <span class="navProfil__class"></span>
+                Classe : <span class="navProfil__class" id="classeProfil"></span>
               </p>
             </li>
             <li class="navProfil__el">
@@ -52,8 +92,9 @@
   </nav>
 
   <button id="clickme">Button</button>
+  <button id="addData">Ajoute de la data à ton compte </button>
 
-  <p>Ton email est <span id="spane"></span></p>
+  
 
 </body>
 </html>

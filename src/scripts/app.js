@@ -6,36 +6,13 @@ import logoutMethod from '../scripts/components/logout';
 import db, { auth } from './firebase';
 import { login, logout, dataUser } from './storeManage/userStore';
 import { store } from '../app/store';
-import popUpInfo from './components/popupcreacompte';
 import { profil } from './storeManage/userDataStore';
-import { collection, onSnapshot } from 'firebase/firestore';
-
+import { collection, onSnapshot, setDoc, doc, query, addDoc, serverTimestamp } from 'firebase/firestore';
+import popUpInfo from './components/popupcreacompte';
+import navNiveau from './components/NiveauNavJeux';
 
 document.querySelector('.nav__button').addEventListener('click', (e) => {
-    // loginMethod();
-    // onAuthStateChanged(auth, (autUser) => {
-    //     if (autUser) {
-    //         console.log(autUser.email);
-    //         store.dispatch(
-    //             login({
-    //                 uid: autUser.uid,
-    //                 photo: autUser.photoURL,
-    //                 email: autUser.email,
-    //                 displayName: autUser.displayName
-    //             })
-    //         )
-    //         console.log(autUser.email);
-    //     } else {
-    //         store.dispatch(
-    //             logout()
-    //         )
-    //     }
-    // })
 
-
-    // console.log(store.getState());
-    // const user = store.getState().user;
-    // console.table(user.user);
 
     if (e.target.classList.contains('nav__button--logout')) {
         logoutMethod();
@@ -51,17 +28,19 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
                         email: autUser.email,
                         displayName: autUser.displayName
                     })
-                )
+                    
+                ),
                 console.log(autUser.email);
             } else {
                 store.dispatch(
                     logout()
                 )
             }
+            
         });
-
         console.log(store.getState());
         const user = store.getState().user;
+        document.querySelector('#classProfil').innerHTML = store.getState().
         console.table(user.user);
     }
 
@@ -69,11 +48,17 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
 
 });
 
-popUpInfo();
+
+
+
+
 
 
 document.querySelector('#clickme').addEventListener('click', ()=>{
-    console.log('haaaaaaaaaaaaaaaaaaaaaaa');
+    
+    setDoc(doc(db, 'users', store.getState().user.user.uid),{
+        name : 'lololl'
+    })
 
     onSnapshot(collection(db,'users'), (snapshot) =>{
         store.dispatch(
@@ -85,10 +70,22 @@ document.querySelector('#clickme').addEventListener('click', ()=>{
             )
         )
     })
+});
+
+document.querySelector('#addData').addEventListener('click', ()=>{
+    
+    console.log('je suis les données ');
+    ///
+    //ajoute un document dans un élément de user 
+    addDoc(collection(db, "users", store.getState().dataPerso.dataUser[0].id, 'datahub'), {
+        timestamp : serverTimestamp(),
+        data : 'je suis une chèvre ',
+        user : store.getState().user.user.displayName
+    })
+    //crée un document 
+    // setDoc(doc(db, 'users', 'nain', 'data01'),{
+    //     name : 'lololl'
+    // })
 })
 
-
-/// initialiser les stores de redux pour faire la gesstion avec firebase ainsi que la récupérations des données.
-
-/* todo list */
-/// problème de refresh des données 
+navNiveau()

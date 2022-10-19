@@ -76,9 +76,7 @@ export default function popUpInfo() {
         localStorage.setItem('pseudo', dataPseudo.value);
         let dataClass = document.querySelector('.popup__select');
         localStorage.setItem('class', dataClass.value);
-
-
-
+        // push data user in user collection 
         try {
             const docRef = addDoc(collection(db, "users"), {
                 utilisateur: store.getState().user.user.displayName,
@@ -90,7 +88,7 @@ export default function popUpInfo() {
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-    })
+    });
     boxpopup.appendChild(btnpopdata);
 
 
