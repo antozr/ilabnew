@@ -1,4 +1,6 @@
 .nav {
+    position: relative;
+    z-index: 10;
     width: 100%;
     height: 60px;
     background-color: #00000010;
@@ -6,6 +8,8 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 0 38px;
+    display: none;
+
 
     &__logo {
         display: flex;

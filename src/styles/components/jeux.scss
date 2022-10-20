@@ -1,0 +1,136 @@
+.sect {
+    width: 100%;
+    //height: calc(100vh - 60px);
+    background-color: #d9ffcd;
+
+
+    &__list {
+        width: 80vw;
+        height: 80vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 10vw;
+
+    }
+
+    &__el {
+        width: 40vw;
+        height: 40vw;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        backdrop-filter: grayscale(30%);
+
+        &:nth-child(1) {
+            background-color: red;
+            background-image: url(../../assets/images/bois01.png);
+        }
+
+        &:nth-child(2) {
+            background-color: blueviolet;
+            background-image: url(../../assets/images/ferme01.png);
+        }
+
+        &:nth-child(3) {
+            background-color: chartreuse;
+            background-image: url(../../assets/images/diams01.png);
+        }
+
+        &:nth-child(4) {
+            background-color: cadetblue;
+            background-image: url(../../assets/images/mine01.png);
+        }
+
+        &--select {
+            border: 6px solid red;
+        }
+    }
+}
+
+
+.popupChoice {
+
+    width: 400px;
+    height: 150px;
+    border-radius: 6px;
+    background-color: #f2f2f2;
+    position: relative;
+    // position: absolute;
+    // top: 60vh;
+    // right: 2vw;
+
+
+    &>p {
+        color: #000000;
+        font-size: 16px;
+        line-height: 160%;
+        padding: 8px 10px;
+        width: 100%;
+        height: 110px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    &__btnBox {
+        width: 100%;
+        height: 38px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    &__btnChoice {
+        width: 50%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #f2f2f2;
+        font-size: 21px;
+        font-weight: 600;
+
+        border: none;
+
+        &--vert{
+            background-color: #8BB753;
+        }
+        &--rouge{
+            background-color: #ED4C5C;
+        }
+        
+    }
+
+    &__list{
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    &__animSortie{
+        animation: exitPopUp 0.8s both;
+    }
+
+}
+
+
+@keyframes exitPopUp {
+    80%{
+        transform: translateX(300px) scale(1);
+    }
+    to{
+        opacity: 0;
+        transform: translateX(400px) scale(0.2);
+        
+    }
+}

@@ -10,6 +10,7 @@ import { profil } from './storeManage/userDataStore';
 import { collection, onSnapshot, setDoc, doc, query, addDoc, serverTimestamp } from 'firebase/firestore';
 import popUpInfo from './components/popupcreacompte';
 import navNiveau from './components/NiveauNavJeux';
+import boxChoice from './components/boxChoiceUser';
 
 document.querySelector('.nav__button').addEventListener('click', (e) => {
 
@@ -89,3 +90,9 @@ document.querySelector('#addData').addEventListener('click', ()=>{
 })
 
 navNiveau()
+
+let boxJeu = document.querySelectorAll(".sect__el");
+
+boxJeu[0].addEventListener('click', ()=>{
+    boxChoice()
+})
