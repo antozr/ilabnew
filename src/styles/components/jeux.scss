@@ -92,23 +92,31 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
         color: #f2f2f2;
         font-size: 21px;
         font-weight: 600;
-
         border: none;
-
-        &--vert{
+        cursor: pointer;
+        transition: 0.3s;
+        &--vert {
             background-color: #8BB753;
+            &:hover {
+                background-color: #495f2d;
+                transition: 0.3s;
+            }
         }
-        &--rouge{
+        &--rouge {
             background-color: #ED4C5C;
+
+            &:hover {
+                background-color: #752931;
+                transition: 0.3s;
+            }
         }
-        
+
     }
 
-    &__list{
+    &__list {
         width: 400px;
         display: flex;
         flex-direction: column;
@@ -117,7 +125,7 @@
         right: 0;
     }
 
-    &__animSortie{
+    &__animSortie {
         animation: exitPopUp 0.8s both;
     }
 
@@ -125,12 +133,13 @@
 
 
 @keyframes exitPopUp {
-    80%{
+    80% {
         transform: translateX(300px) scale(1);
     }
-    to{
+
+    to {
         opacity: 0;
         transform: translateX(400px) scale(0.2);
-        
+
     }
 }

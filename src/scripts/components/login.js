@@ -12,10 +12,17 @@ export default function loginMethod() {
             const user = result
             //injecter la function pour les data ici 
             document.querySelector('.nav__el--name').innerHTML = user.user.displayName;
-            
+            localStorage.setItem('displayname', user.user.displayName);
+
+            if (localStorage.getItem('class') == ' ' || localStorage.getItem('class') == undefined || localStorage.getItem('class') == '') {
+                openBoxPopup(user);
+            } else {
+                document.querySelector('#classeProfil').innerHTML = localStorage.getItem('class');
+                document.querySelector('.navProfil__name').innerHTML = localStorage.getItem('pseudo');
+            }
             changeBtnConnection(user);
             afficheProfil(user);
-            openBoxPopup(user);
+
         })
         .catch((error) => alert(error.message));
 }
@@ -29,28 +36,28 @@ function changeBtnConnection(user) {
         let btnConnection = document.querySelector('.nav__button');
         btnConnection.innerHTML = "Se déconnecter";
         btnConnection.classList.add('nav__button--logout');
-    }else{
+    } else {
         let btnConnection = document.querySelector('.nav__button');
         btnConnection.innerHTML = "Se connecter";
         btnConnection.classList.remove('nav__button--logout');
     }
 }
 
-function afficheProfil(user){
+function afficheProfil(user) {
     let profil = document.querySelector('#profilBox');
-    if (user.user == null){
+    if (user.user == null) {
         profil.classList.add('nav__el--none');
-    }else{
+    } else {
         profil.classList.remove('nav__el--none');
     }
 }
 
-function openBoxPopup(user){
+function openBoxPopup(user) {
 
-    
-    if(user.user != null){
+
+    if (user.user != null) {
         popUpInfo();
-    }else{
+    } else {
         console.log('c\'est mort li pop');
     }
 }

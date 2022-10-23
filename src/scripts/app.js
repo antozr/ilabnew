@@ -11,6 +11,7 @@ import { collection, onSnapshot, setDoc, doc, query, addDoc, serverTimestamp } f
 import popUpInfo from './components/popupcreacompte';
 import navNiveau from './components/NiveauNavJeux';
 import boxChoice from './components/boxChoiceUser';
+import actionPerso from './components/ActionPerso';
 
 document.querySelector('.nav__button').addEventListener('click', (e) => {
 
@@ -32,6 +33,7 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
                     
                 ),
                 console.log(autUser.email);
+                
             } else {
                 store.dispatch(
                     logout()
@@ -41,7 +43,7 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
         });
         console.log(store.getState());
         const user = store.getState().user;
-        document.querySelector('#classProfil').innerHTML = store.getState().
+        //document.querySelector('#classProfil').innerHTML = store.getState().dataPerso.dataUser.pseudo;
         console.table(user.user);
     }
 
@@ -50,17 +52,12 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
 });
 
 
-
-
-
-
-
 document.querySelector('#clickme').addEventListener('click', ()=>{
     
     setDoc(doc(db, 'users', store.getState().user.user.uid),{
         name : 'lololl'
     })
-
+    // recupère la data 
     onSnapshot(collection(db,'users'), (snapshot) =>{
         store.dispatch(
             profil(
@@ -94,5 +91,10 @@ navNiveau()
 let boxJeu = document.querySelectorAll(".sect__el");
 
 boxJeu[0].addEventListener('click', ()=>{
-    boxChoice()
+    boxChoice('je veux du miel')
 })
+boxJeu[1].addEventListener('click', ()=>{
+    boxChoice('je veux du pain')
+})
+
+actionPerso();

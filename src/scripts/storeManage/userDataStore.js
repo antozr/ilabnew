@@ -14,6 +14,9 @@ export const userDataSlice = createSlice({
         },
         dataJob : (state, action) =>{
             state.dataUser = action.payload;
+        },
+        userDataPerso : (state, action)=>{
+            state.user = action.payload;
         }
 
     }

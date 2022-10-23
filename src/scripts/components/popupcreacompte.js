@@ -1,8 +1,9 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import db from "../firebase";
 // push data
 import { collection, addDoc } from "firebase/firestore";
 import { store } from "../../app/store";
+import { profil } from '../storeManage/userDataStore';
 
 
 
@@ -84,10 +85,26 @@ export default function popUpInfo() {
                 pseudo: dataPseudo.value,
                 metier: dataClass.value
             });
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Document written with ID: "+ docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+
+        onSnapshot(collection(db,'users'), (snapshot) =>{
+            store.dispatch(
+                profil(
+                    snapshot.docs.map((doc) =>({
+                        id: doc.id,
+                        channel : doc.data()
+
+                    }))
+                )
+            )
+        })
+        
+
+        //
+        // boxpopup.style.display ='none';
     });
     boxpopup.appendChild(btnpopdata);
 

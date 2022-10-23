@@ -2,6 +2,9 @@
 
 .popup{
 
+    &--none{
+        display: none;
+    }
     width: 540px;
     height: 400px;
     position: absolute;
@@ -60,6 +63,30 @@
         border: none;
         margin: 28px 0;
 
+    }
+
+
+    &__Travail{
+        background-image: url(../../assets/images/boxTravail.png);
+        width: 321px;
+        height: 118px;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10vh;
+        left: 15vw;
+    }
+    &__txtTravail{
+        font-size: 21px;
+        text-align: center;
+
+        &--big{
+            font-size: 28px;
+            font-weight: 600;
+        }
     }
     
 }
