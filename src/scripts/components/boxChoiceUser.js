@@ -2,12 +2,13 @@
 
 
 
-export default function boxChoice(textMessage) {
+export default function boxChoice(textMessage, actionTrue) {
     /// create box pop up
     let textMessage2 = textMessage;
+    let choiceTextBtn = actionTrue;
     //let textMessage = 'Il y a le feu dans le district des mines.\n Allez les aider ?';
 
-    new boxPopTeam(textMessage2);
+    new boxPopTeam(textMessage2, choiceTextBtn);
 
     let allMessage = document.querySelectorAll('.popupChoice');
     let endMessage = document.querySelector('.popupChoice');
@@ -25,50 +26,52 @@ export default function boxChoice(textMessage) {
 
 
 }
-const boxPopTeam = (textMessage) => {
+const boxPopTeam = (textMessage, choiceTextBtn) => {
     let boxPop = document.createElement('li');
     boxPop.classList.add('popupChoice');
+    if (choiceTextBtn === false){
+        boxPop.classList.add('popupChoice--small');
+    }
     document.querySelector('.popupChoice__list').appendChild(boxPop);
     //
     let textBoxPop = document.createElement('p');
     textBoxPop.innerText = textMessage;
     boxPop.appendChild(textBoxPop);
     //
-    let boxBtn = document.createElement('div');
-    boxBtn.classList.add('popupChoice__btnBox');
-    boxPop.appendChild(boxBtn);
-    //
-    let btnAccept = document.createElement('button');
-    btnAccept.classList.add('popupChoice__btnChoice');
-    btnAccept.classList.add('popupChoice__btnChoice--vert');
-    btnAccept.textContent = 'Accepter';
-    boxBtn.appendChild(btnAccept);
+    if (choiceTextBtn === true) {
+        let boxBtn = document.createElement('div');
+        boxBtn.classList.add('popupChoice__btnBox');
+        boxPop.appendChild(boxBtn);
+        //
+        let btnAccept = document.createElement('button');
+        btnAccept.classList.add('popupChoice__btnChoice');
+        btnAccept.classList.add('popupChoice__btnChoice--vert');
+        btnAccept.textContent = 'Accepter';
+        boxBtn.appendChild(btnAccept);
 
-    btnAccept.addEventListener('click', (e) => {
-        console.log('je ne suis pas un connard')
-        boxPop.classList.add('popupChoice__animSortie');
-        let target1 = e.target.parentNode.parentNode;
-        let valueChoice = true;
-        exitpopUp(target1, valueChoice)
-    })
-    //
-    let btnrefu = document.createElement('button');
-    btnrefu.classList.add('popupChoice__btnChoice');
-    btnrefu.classList.add('popupChoice__btnChoice--rouge');
-    btnrefu.textContent = 'Refuser';
-    boxBtn.appendChild(btnrefu)
-    //
-    btnrefu.addEventListener('click', (e) => {
-        console.log('Je refuse, je suis un connard');
+        btnAccept.addEventListener('click', (e) => {
+            console.log('je ne suis pas un connard')
+            boxPop.classList.add('popupChoice__animSortie');
+            let target1 = e.target.parentNode.parentNode;
+            let valueChoice = true;
+            exitpopUp(target1, valueChoice)
+        })
+        //
+        let btnrefu = document.createElement('button');
+        btnrefu.classList.add('popupChoice__btnChoice');
+        btnrefu.classList.add('popupChoice__btnChoice--rouge');
+        btnrefu.textContent = 'Refuser';
+        boxBtn.appendChild(btnrefu)
+        //
+        btnrefu.addEventListener('click', (e) => {
+            console.log('Je refuse, je suis un connard');
 
-        boxPop.classList.add('popupChoice__animSortie');
-        let target1 = e.target.parentNode.parentNode;
-        let valueChoice = false;
-        exitpopUp(target1, valueChoice)
-
-
-
-    })
+            boxPop.classList.add('popupChoice__animSortie');
+            let target1 = e.target.parentNode.parentNode;
+            let valueChoice = false;
+            exitpopUp(target1, valueChoice)
+        });
+    }
 }
 
 

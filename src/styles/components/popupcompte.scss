@@ -78,6 +78,10 @@
         position: absolute;
         top: 10vh;
         left: 15vw;
+        &--small{
+            height: 60px;
+            font-weight: 600;
+        }
     }
     &__txtTravail{
         font-size: 21px;

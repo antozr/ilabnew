@@ -59,7 +59,7 @@
     // position: absolute;
     // top: 60vh;
     // right: 2vw;
-
+    
 
     &>p {
         color: #000000;
@@ -73,6 +73,14 @@
         align-items: center;
         justify-content: center;
 
+    }
+    &--small{
+        height: 60px;
+        font-weight: 600;
+        margin: 16px 0;
+        &>p{
+            height: 60px;
+        }
     }
 
     &__btnBox {
@@ -123,6 +131,7 @@
         position: absolute;
         bottom: 0;
         right: 0;
+        z-index: 100;
     }
 
     &__animSortie {

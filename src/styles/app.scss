@@ -5,6 +5,7 @@
 @import 'components/popupcompte';
 @import 'components/fonts';
 @import 'components/jeux';
+@import 'components/jeanFront';
 
 
 *{
@@ -14,6 +15,19 @@
     box-sizing: border-box;
 }
 
-body{
+// body{
+//     overflow-x: hidden;
+// }
+/// code jean
+
+body {
+    margin: 0;
+    font-family: "Ubuntu", sans-serif;
+    list-style: 1.4;
+    font-size: 16px;
+    line-height: 160%;
+    font-weight: 400;
+    list-style: none;
     overflow-x: hidden;
 }
+

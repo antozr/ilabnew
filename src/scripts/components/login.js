@@ -11,7 +11,7 @@ export default function loginMethod() {
             console.log(result.user);
             const user = result
             //injecter la function pour les data ici 
-            document.querySelector('.nav__el--name').innerHTML = user.user.displayName;
+            //document.querySelector('.nav__el--name').innerHTML = user.user.displayName;
             localStorage.setItem('displayname', user.user.displayName);
 
             if (localStorage.getItem('class') == ' ' || localStorage.getItem('class') == undefined || localStorage.getItem('class') == '') {

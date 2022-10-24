@@ -1,0 +1,280 @@
+// navigations
+.nav__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    max-width: 600px;
+    margin: 20px auto 0;
+    list-style: none;
+    text-align: center;
+    z-index: 60;
+    position: relative;
+}
+
+
+.nav__item {
+    cursor: pointer;
+}
+
+.nav__item--capitole {
+    font-size: 25px;
+}
+
+.action--active {
+    color: red;
+}
+
+// svg isometric
+.oui {
+    transition: all .2s;
+    z-index: 40;
+}
+
+.oui:hover,
+.oui--active {
+    transform: translateY(-20px);
+    fill: #A6DC61;
+    z-index: 50;
+}
+
+// truc de thronte donc les sliders
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 150px);
+    column-gap: 2%;
+}
+
+.slider__content {
+    grid-column: 1/ span 3;
+    grid-row: 1/-1;
+    padding: 20px;
+    z-index: 10;
+    width: 45ch;
+}
+
+.slider__img {
+    grid-column: 3/ -1;
+    grid-row: 1 / span 3;
+    max-width: 100%;
+    align-self: center;
+}
+
+.slider {
+    width: 80%;
+    height: 45vh;
+    max-width: 1200px;
+    margin: 10vh auto 0;
+    position: relative;
+
+}
+
+.slider__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slider__element {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slider__control {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.slider__btn {
+    grid-column: 6;
+    grid-row: 4;
+
+}
+
+.slider__btn button {
+    padding: 5px 8px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+
+}
+
+.slider__btn button:hover {
+    padding: 5px 12px;
+    transition: 0.3s ease-in;
+    background-color: rgb(238, 235, 235);
+    border-radius: 5px;
+    border: none;
+    text-align: start;
+
+}
+
+.slider__btn--next {
+    grid-row: 3;
+    justify-self: center;
+    align-self: flex-end;
+}
+
+/* les animations */
+
+.slider__content {
+    transform: translateX(50px);
+    opacity: 0;
+    transition: 0.3s ease-out;
+    pointer-events: none;
+}
+
+.slider__content h2 {
+    transform: translateX(90px);
+    transform: scale(0.3);
+    opacity: 0.2;
+    transition: 0.6s ease-out;
+    pointer-events: none;
+}
+
+.slider__img {
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: 0.6s ease-out;
+    pointer-events: none;
+    animation-delay: 0.2s;
+}
+
+.slide__logo {
+    width: 208px;
+    height: 208px;
+}
+
+.slide__command {
+    //grid-column: 1/-1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 50px auto 0;
+    list-style: none;
+    height: 110%;
+    text-align: center;
+    transform: translateY(50px);
+    //opacity: 0;
+    opacity: 1;
+    transition: 0.6s ease-out;
+    //pointer-events: none;
+    animation-delay: 0.2s;
+    position: relative;
+    z-index: 150;
+}
+
+.command__info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    p {
+        margin: 0;
+    }
+
+    &:hover{
+        background-color: red;
+    }
+}
+
+.command__button {
+
+    background: #fff;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    padding: 1em 2em;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.command__info {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.6s ease-out;
+    pointer-events: none;
+    animation-delay: 0.2s;
+}
+
+.command__el:hover .command__button,
+.command__el:focus .command__button {
+    box-shadow: 0 0.5em 0.5em -0.4em rgba(34, 34, 34, 0.412);
+    transform: translateY(-0.25em);
+    cursor: pointer;
+}
+
+.command__el:hover .command__info,
+.command__el:focus .command__info {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+    transform: translateX(0);
+    transition: 0.3s ease-in;
+    z-index: -1;
+}
+
+.command__el:nth-child(2) {
+    font-size: 25px;
+    order: 0;
+    flex: 1 1 auto;
+    align-self: flex-start;
+}
+
+.not__here {
+    grid-column: 1/-1;
+    text-align: center;
+    font-size: 25px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.6s ease-out;
+    pointer-events: none;
+    animation-delay: 0.2s;
+
+    
+}
+
+.slider__element--show .slider__content,
+.slider__element--show .slider__img,
+.slider__element--show .not__here,
+.slider__element--show .slider__content h2 {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+    transform: translateX(0);
+    transition: 0.3s ease-in;
+    z-index: 40;
+}
+
+.slider__main .slide__command {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+    transform: translateX(0);
+    transition: 0.3s ease-in;
+    z-index: 40;
+}
+
+.slider__main .not__here {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.6s ease-out;
+    pointer-events: none;
+    animation-delay: 0.2s;
+}
