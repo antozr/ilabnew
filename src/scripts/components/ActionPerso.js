@@ -1,9 +1,10 @@
 /// comprend les actions qui vont couté des points au perso 
-import { setDoc, doc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { setDoc, doc, addDoc, collection, serverTimestamp, onSnapshot } from 'firebase/firestore';
 import db from '../firebase';
 import { store } from "../../app/store";
 import boxChoice from "./boxChoiceUser";
 import { dataJob } from '../storeManage/userDataStore';
+import dbAllTime from './manageDB';
 
 export default function actionPerso() {
 
@@ -100,13 +101,19 @@ export default function actionPerso() {
 
     /// ajout du bonheur
     let dodoActif = true;
+    localStorage.setItem('rangeBonheur', 50);
     btnBonheur.addEventListener('click', () => {
-        localStorage.setItem('rangeBonheur', 50);
+        dbAllTime();
         let valueBonheur = localStorage.getItem('rangeBonheur');
         valueBonheur = parseInt(valueBonheur) + 1;
         console.log(valueBonheur);
         localStorage.setItem('rangeBonheur', valueBonheur);
+        let allRangeDiv = document.querySelectorAll('.nav__rangeINto');
         allRangeDiv[2].style.width = valueBonheur + '%';
+        allRangeDiv[6].style.width = valueBonheur + '%';
+        allRangeDiv[10].style.width = valueBonheur + '%';
+        allRangeDiv[13].style.width = valueBonheur + '%';
+        allRangeDiv[17].style.width = valueBonheur + '%';
         //
         let textMessage = localStorage.getItem('pseudo') + " rend heureux le groupe.";
         boxChoice(textMessage, false);
@@ -116,20 +123,23 @@ export default function actionPerso() {
             setTimeout(() => {
                 dodoActif = true;
                 console.log('le dodo est fini');
-            }, 100)
+            }, 100);
         }
 
     })
     /// temps de 6min pour reprendre 20 d'énergies
 
     btnDodo.addEventListener('click', () => {
+       
         dodoPersoFc(totalEnergie);
-
+        let textMessage = localStorage.getItem('pseudo') + " se repose.";
+        boxChoice(textMessage, false);
 
     });
 
 
     /// vérif endroit du gas 
+
     let allItemNavDistric = document.querySelectorAll('.nav__item');
 
     allItemNavDistric.forEach((el) => {
@@ -145,41 +155,59 @@ export default function actionPerso() {
 function avancerStatNav(changeBox) {
     let allRangeDiv = document.querySelectorAll('.nav__rangeINto');
     if (localStorage.getItem('class') == 'Paysans') {
-        var changeBox = [-1, 15, -1, -5];
+        var changeBox = [-1, 15, -1, -5, -1, 15, -1, -5, -1, 15, -1, -5, -1, 15, -1, -5, -1, 15, -1, -5];
     } else if (localStorage.getItem('class') == 'bucherons') {
-        var changeBox = [-1, 5, -1, -5];
+        var changeBox = [-1, 5, -1, -5, -1, 5, -1, -5, -1, 5, -1, -5, -1, 5, -1, -5, -1, 5, -1, -5];
     } else if (localStorage.getItem('class') == 'mineurs') {
-        var changeBox = [-3, -5, -1, 5];
+        var changeBox = [-3, -5, -1, 5, -3, -5, -1, 5, -3, -5, -1, 5, -3, -5, -1, 5, -3, -5, -1, 5];
     } else if (localStorage.getItem('class') == 'caristes') {
-        var changeBox = [-3, 5, -1, -5];
+        var changeBox = [-3, 5, -1, -5, -3, 5, -1, -5, -3, 5, -1, -5, -3, 5, -1, -5, -3, 5, -1, -5];
     };
     // let tableEffectAction = changeBox;
-    let titleRange = ['Nouriture', 'Materiaux', 'Satisfaction', 'Argent'];
+
     // faire le lien local 
     let i = 0
     allRangeDiv.forEach((el) => {
-        
-            let widthEl = el.style.width;
-            console.log(widthEl);
-            widthEl = parseInt(widthEl, 10);
-            console.log(widthEl);
-            let valueWi = widthEl + changeBox[i];
-            el.style.width = valueWi;
-            i++;
-        
+
+        let widthEl = el.style.width;
+        widthEl = parseInt(widthEl, 10);
+        let valueWi = widthEl + changeBox[i];
+        console.log(valueWi);
+        el.style.width = valueWi + '%';
+        i++;
+        console.log(i);
+
     });
-    // for (let i = 0; i <= 3; i++) {
+    let tabBoxTitle = ['nourritureWidth', 'materiauxWidth', 'bonheurWidth', 'argentWidth']
+    for (let index = 0; index < 4; index++) {
+        let widthRange = allRangeDiv[index].style.width;
+        widthRange = parseInt(widthRange, 10);
+        localStorage.setItem(tabBoxTitle[index], widthRange);
+    }
 
-    //     let widthEl = allRangeDiv[i].style.width;
-    //     console.log(widthEl);
-    //     widthEl = parseInt(widthEl, 10);
-    //     console.log(widthEl);
-    //     let valueWi = widthEl + changeBox[i];
-    //     allRangeDiv[i].style.width = 50 + '%';
-    //     console.log(allRangeDiv[i].style.width);
-    //     localStorage.setItem(titleRange[i] + 'width', widthEl + changeBox[i]);
+    setDoc(doc(db, 'dataRange', "3zZic48M0XGDkHI9AyCr"), {
+        nourriture: localStorage.getItem('nourritureWidth'),
+        materiaux:  localStorage.getItem('materiauxWidth'),
+        bonheur:  localStorage.getItem('bonheurWidth'),
+        argent:  localStorage.getItem('argentWidth')
+    });
 
-    // }
+    onSnapshot(collection(db, "dataRange"), (snap) => {
+        store.dispatch(
+            dataJob(
+                snap.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data()
+                })),
+                snap.docs.forEach((el) => {
+                    console.log(el.data())
+                })
+            )
+        )
+    })
+    console.log(store.getState().dataPerso.dataUser);
+
+
 }
 
 

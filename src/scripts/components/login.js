@@ -3,6 +3,7 @@
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../firebase';
 import popUpInfo from '../components/popupcreacompte';
+import dbAllTime from './manageDB';
 
 export default function loginMethod() {
     console.log('hello');
@@ -22,6 +23,7 @@ export default function loginMethod() {
             }
             changeBtnConnection(user);
             afficheProfil(user);
+            dbAllTime();
 
         })
         .catch((error) => alert(error.message));

@@ -13,6 +13,7 @@ import navNiveau from './components/NiveauNavJeux';
 import boxChoice from './components/boxChoiceUser';
 import actionPerso from './components/ActionPerso';
 import suivisTravail from './components/TravailGames';
+import dbAllTime from './components/manageDB';
 
 document.querySelector('.nav__button').addEventListener('click', (e) => {
 
@@ -46,7 +47,87 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
         const user = store.getState().user;
         //document.querySelector('#classProfil').innerHTML = store.getState().dataPerso.dataUser.pseudo;
         console.table(user.user);
-    }
+    };
+    onSnapshot(collection(db, "dataRange"), (snap) => {
+        store.dispatch(
+            dataJob(
+                snap.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data()
+                })),
+                snap.docs.forEach((el) => {
+                    console.log(el.data())
+                })
+            )
+        )
+    });
+    let allRangeDiv = document.querySelectorAll('.nav__rangeINto');
+    let indexRangeStart = 0;
+    allRangeDiv.forEach((el) => {
+
+        if (indexRangeStart == 0) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.nourriture, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 1) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.materiaux, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 2) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.bonheur, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 3) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.argent, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 4) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.nourriture, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 5) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.materiaux, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 6) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.bonheur, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 7) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.argent, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 8) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.nourriture, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 9) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.materiaux, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 10) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.bonheur, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 11) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.argent, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 12) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.nourriture, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 13) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.materiaux, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 14) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.bonheur, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 15) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.argent, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 16) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.nourriture, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 17) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.materiaux, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 18) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.bonheur, 10) + '%';
+            indexRangeStart++;
+        } else if (indexRangeStart == 19) {
+            el.style.width = parseInt(store.getState().dataPerso.dataUser[0].data.argent, 10) + '%';
+            indexRangeStart++;
+        }
+
+    })
 
 
 
@@ -67,10 +148,10 @@ document.querySelector('#clickme').addEventListener('click', () => {
                     channel: doc.data(),
                 }))
             ),
-            
+
         )
     })
-    onSnapshot(collection(db, 'works',store.getState().user.user.uid, 'enCours'), (snapshot) => {
+    onSnapshot(collection(db, 'works', store.getState().user.user.uid, 'enCours'), (snapshot) => {
         store.dispatch(
             dataJob(
                 snapshot.docs.map((doc) => ({
@@ -79,10 +160,10 @@ document.querySelector('#clickme').addEventListener('click', () => {
 
                 }))
             )
-            
+
         )
     })
-    onSnapshot(collection(db, 'works','mine', 'enCours'), (snapshot) => {
+    onSnapshot(collection(db, 'works', 'mine', 'enCours'), (snapshot) => {
         store.dispatch(
             dataJob(
                 snapshot.docs.map((doc) => ({
@@ -91,7 +172,7 @@ document.querySelector('#clickme').addEventListener('click', () => {
 
                 }))
             )
-            
+
         )
     })
     console.log(store.getState().dataPerso.dataUser);
@@ -113,8 +194,8 @@ document.querySelector('#addData').addEventListener('click', () => {
     // })
     suivisTravail();
 })
-
-navNiveau()
+suivisTravail();
+navNiveau();
 
 // let boxJeu = document.querySelectorAll(".sect__el");
 
@@ -131,15 +212,15 @@ actionPerso();
 //// code de jean //
 
 // capacité selon la classe du user
-const classes = ['caristes', 'bucherons','capital', 'mineurs', 'Paysans']
-if (localStorage.getItem('class')){
-    if(localStorage.getItem('class') === 'Paysans'){
+const classes = ['caristes', 'bucherons', 'capital', 'mineurs', 'Paysans']
+if (localStorage.getItem('class')) {
+    if (localStorage.getItem('class') === 'Paysans') {
         var userClass = 4
-    }else if(localStorage.getItem('class') === 'mineurs'){
+    } else if (localStorage.getItem('class') === 'mineurs') {
         var userClass = 3
-    }else if(localStorage.getItem('class') === 'bucherons'){
+    } else if (localStorage.getItem('class') === 'bucherons') {
         var userClass = 1
-    }else if(localStorage.getItem('class') === 'caristes'){
+    } else if (localStorage.getItem('class') === 'caristes') {
         var userClass = 0
     }
     var userClass = classes[userClass];
@@ -184,7 +265,7 @@ for (let i = 0; i < navi.length; i++) {
 //trigger hover de la map quand on hover les boutons
 
 // trigger hover du travail
-const travailHover = document.querySelectorAll('.command__button--travail')
+const travailHover = document.querySelectorAll('.zone--travail')
 const travailMap = document.querySelectorAll('.oui--travail')
 
 for (let u = 0; u < travailHover.length; u++) {
@@ -207,7 +288,7 @@ for (let u = 0; u < travailHover.length; u++) {
 
 
 // trigger hover du repos
-const reposHover = document.querySelectorAll('.command__button--repos')
+const reposHover = document.querySelectorAll('.zone--repos')
 const reposMap = document.querySelectorAll('.oui--repos')
 
 for (let u = 0; u < reposHover.length; u++) {
@@ -230,7 +311,7 @@ for (let u = 0; u < reposHover.length; u++) {
 }
 
 // trigger hover du détente
-const détenteHover = document.querySelectorAll('.command__button--détente')
+const détenteHover = document.querySelectorAll('.zone--détente')
 const détenteMap = document.querySelectorAll('.oui--détente')
 
 for (let u = 0; u < détenteHover.length; u++) {
@@ -250,4 +331,3 @@ for (let u = 0; u < détenteHover.length; u++) {
         }
     }
 }
-
