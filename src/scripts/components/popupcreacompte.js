@@ -4,6 +4,7 @@ import db from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { store } from "../../app/store";
 import { profil } from '../storeManage/userDataStore';
+import { login } from "../storeManage/userStore";
 
 
 
@@ -98,13 +99,21 @@ export default function popUpInfo() {
                         channel : doc.data()
 
                     }))
-                )
+                ),
+                
             )
         })
+        // a vérifier 
+        store.dispatch(
+            login({
+                pseudo : dataPseudo.value,
+                metier : dataClass.value
+            })
+        )
         
 
-        //
-        // boxpopup.style.display ='none';
+        
+        boxpopup.style.display ='none';
     });
     boxpopup.appendChild(btnpopdata);
 

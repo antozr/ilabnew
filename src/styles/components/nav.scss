@@ -108,15 +108,24 @@
         border-radius: 6px;
         border: 1px solid #000000;
 
-        &>div {
-            width: 80%;
-            height: 100%;
-            background-color: grey;
-            border-radius: 6px 0 0 6px ;
-        }
+    
+    }
+    &__rangeINto{
+        width: 80%;
+        height: 100%;
+        background-color: grey;
+        border-radius: 6px 0 0 6px ;
+        transition: 0.3s;
     }
 }
 
+.game{
+
+    &__boxNav{
+        width: 80%;
+
+    }
+}
 
 .range{
 

@@ -54,6 +54,8 @@
     padding: 20px;
     z-index: 10;
     width: 45ch;
+
+    
 }
 
 .slider__img {
@@ -277,4 +279,9 @@
     transition: 0.6s ease-out;
     pointer-events: none;
     animation-delay: 0.2s;
+}
+
+.zone__img:hover+.oui {
+    fill: #A6DC61;
+
 }

@@ -140,6 +140,13 @@
 
 }
 
+.game{
+
+    &__row{
+        display: flex;
+        flex-direction: row;
+    }
+}
 
 @keyframes exitPopUp {
     80% {

@@ -1,0 +1,28 @@
+<svg width="1932" height="1106" viewBox="0 0 1932 1106" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path d="M965.825 553.229L483.188 277.235L0.549805 553.229L483.188 829.223L965.825 553.229Z" fill="#3E3F41"/>
+<path d="M1448.46 829.505L965.825 553.511L483.188 829.505L965.825 1105.5L1448.46 829.505Z" fill="#3E3F41"/>
+<path d="M1448.46 276.953L965.825 0.958252L483.188 276.953L965.825 552.947L1448.46 276.953Z" fill="#3E3F41"/>
+<path d="M1931.1 553.229L1448.46 277.235L965.825 553.229L1448.46 829.223L1931.1 553.229Z" fill="#3E3F41"/>
+<rect x="107.601" y="276.751" width="749.359" height="506.225" fill="url(#pattern0)"/>
+<rect x="713.62" y="590.647" width="502.596" height="406.432" fill="url(#pattern1)"/>
+<rect x="1121.87" y="278.566" width="580.617" height="431.691" fill="url(#pattern2)"/>
+<rect x="615.641" y="102.566" width="698.555" height="346.556" fill="url(#pattern3)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_755_176488" transform="translate(0 -0.00130578) scale(0.00114025 0.0016879)"/>
+</pattern>
+<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image1_755_176488" transform="translate(-0.000260137) scale(0.00179305 0.00221729)"/>
+</pattern>
+<pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image2_755_176488" transform="scale(0.000838223 0.0011274)"/>
+</pattern>
+<pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image3_755_176488" transform="scale(0.000822726 0.00165837)"/>
+</pattern>
+<image id="image0_755_176488" width="877" height="594" xlink:href="/assets/carrière.png"/>
+<image id="image1_755_176488" width="558" height="451" xlink:href="/assets/maisons.png"/>
+<image id="image2_755_176488" width="1193" height="887" xlink:href="/assets/pubs.png"/>
+<image id="image3_755_176488" width="1216" height="603" xlink:href="/assets/usine--carriere.png"/>
+</defs>
+</svg>

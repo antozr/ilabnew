@@ -1,6 +1,9 @@
 /// comprend les actions qui vont couté des points au perso 
-
+import { setDoc, doc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import db from '../firebase';
+import { store } from "../../app/store";
 import boxChoice from "./boxChoiceUser";
+import { dataJob } from '../storeManage/userDataStore';
 
 export default function actionPerso() {
 
@@ -11,41 +14,118 @@ export default function actionPerso() {
 
     let btnDodo = document.querySelector('#dodo');
     barreenergieperso.innerHTML = totalEnergie;
-    /// text btn action perso
-    setTimeout(()=>{
-        textBtnAction();
-    },10)
-    btnActionPerso.addEventListener('click', () => {
 
+    let btnBonheur = document.querySelector('#bonheur');
+
+    ///
+    /// text btn action perso
+    setTimeout(() => {
+        textBtnAction();
+        verifTravailSecteur();
+        // set les variable local 
+        let tableEffectAction = 50;
+        let titleRange = ['Nouriture', 'Materiaux', 'Satisfaction', 'Argent'];
+        // faire le lien local 
+        for (let i = 0; i < 3; i++) {
+            localStorage.setItem(titleRange[i] + 'width', tableEffectAction);
+        }
+    }, 10);
+
+
+    btnActionPerso.addEventListener('click', () => {
+        let titleClass = document.querySelector('.slider__element--show');
         totalEnergie = totalEnergie - 20;
-        nbTravailleur++;
-        popListTravailleur(nbTravailleur)
-        if (totalEnergie <= 0) {
-            barreenergieperso.innerHTML = 0;
-            alert('Tu nas plus dernergie !!');
+
+        if (nbTravailleur == 0) {
+            nbTravailleur = 1;
+
+            // set firebase data user
+            addDoc(collection(db, "works", store.getState().user.user.uid, 'enCours'), {
+                timestamp: serverTimestamp(),
+                name: localStorage.getItem('pseudo'),
+                uid: store.getState().user.user.uid,
+                metier: localStorage.getItem('class'),
+                lieux: titleClass.title,
+                travail: true
+            });
+            addDoc(collection(db, "works", 'mine', 'enCours'), {
+                timestamp: serverTimestamp(),
+                name: localStorage.getItem('pseudo'),
+                uid: store.getState().user.user.uid,
+                travail: true
+            });
+            localStorage.setItem('valueBtnAction', btnActionPerso.innerHTML)
+            btnActionPerso.innerHTML = 'Tu dois attendre pour travailler';
+            setTimeout(() => {
+                btnActionPerso.innerHTML = localStorage.getItem('valueBtnAction');
+                nbTravailleur = 0;
+                console.log(nbTravailleur);
+            }, 30000);
+            console.log(nbTravailleur);
+            ////
+            if (totalEnergie <= 0) {
+                barreenergieperso.innerHTML = 0;
+                alert('Tu nas plus dernergie !!');
+
+            } else {
+                barreenergieperso.innerHTML = totalEnergie;
+                if (localStorage.getItem('class') == 'Paysans') {
+                    var lieux = ' les champs';
+                    var changeBox = [-1, 15, -1, -5];
+                } else if (localStorage.getItem('class') == 'bucherons') {
+                    var lieux = ' les bois';
+                    var changeBox = [-1, 5, -1, -5];
+                } else if (localStorage.getItem('class') == 'mineurs') {
+                    var lieux = ' les mines';
+                    var changeBox = [-3, -5, -1, 5];
+                } else if (localStorage.getItem('class') == 'caristes') {
+                    var lieux = ' les carrières';
+                    var changeBox = [-3, 5, -1, -5];
+                }
+                let textMessage = "Tu es parti travailler dans" + lieux + "!";
+                boxChoice(textMessage, false);
+                let textMessage2 = localStorage.getItem('pseudo') + " +5 matériaux / -1 nourriture /-1 bonheur /-5 argent";
+                boxChoice(textMessage2, false);
+                verifTravailSecteur();
+                avancerStatNav();
+
+            }
 
         } else {
-            barreenergieperso.innerHTML = totalEnergie;
-            if (localStorage.getItem('class') == 'Paysans'){
-                var lieux = ' les champs';
-            }else if (localStorage.getItem('class') == 'bucherons'){
-                var lieux = ' les bois';
-            }else if (localStorage.getItem('class') == 'mineurs'){
-                var lieux = ' les mines';
-            }else if (localStorage.getItem('class') == 'caristes'){
-                var lieux = ' les carrières';
-            }
-            let textMessage = "Tu es parti travailler dans"+ lieux +"!";
-            boxChoice(textMessage, false);
-            verifTravailSecteur();
-           
-
+            alert('Tu travail déjà !!')
         }
+
     });
 
+
+    /// ajout du bonheur
+    let dodoActif = true;
+    btnBonheur.addEventListener('click', () => {
+        localStorage.setItem('rangeBonheur', 50);
+        let valueBonheur = localStorage.getItem('rangeBonheur');
+        valueBonheur = parseInt(valueBonheur) + 1;
+        console.log(valueBonheur);
+        localStorage.setItem('rangeBonheur', valueBonheur);
+        allRangeDiv[2].style.width = valueBonheur + '%';
+        //
+        let textMessage = localStorage.getItem('pseudo') + " rend heureux le groupe.";
+        boxChoice(textMessage, false);
+
+        if (dodoActif === true) {
+            dodoActif = false;
+            setTimeout(() => {
+                dodoActif = true;
+                console.log('le dodo est fini');
+            }, 100)
+        }
+
+    })
     /// temps de 6min pour reprendre 20 d'énergies
+
     btnDodo.addEventListener('click', () => {
-        dodoPersoFc(totalEnergie)
+        dodoPersoFc(totalEnergie);
+
+
     });
 
 
@@ -62,23 +142,46 @@ export default function actionPerso() {
     });
 }
 
+function avancerStatNav(changeBox) {
+    let allRangeDiv = document.querySelectorAll('.nav__rangeINto');
+    if (localStorage.getItem('class') == 'Paysans') {
+        var changeBox = [-1, 15, -1, -5];
+    } else if (localStorage.getItem('class') == 'bucherons') {
+        var changeBox = [-1, 5, -1, -5];
+    } else if (localStorage.getItem('class') == 'mineurs') {
+        var changeBox = [-3, -5, -1, 5];
+    } else if (localStorage.getItem('class') == 'caristes') {
+        var changeBox = [-3, 5, -1, -5];
+    };
+    // let tableEffectAction = changeBox;
+    let titleRange = ['Nouriture', 'Materiaux', 'Satisfaction', 'Argent'];
+    // faire le lien local 
+    let i = 0
+    allRangeDiv.forEach((el) => {
+        
+            let widthEl = el.style.width;
+            console.log(widthEl);
+            widthEl = parseInt(widthEl, 10);
+            console.log(widthEl);
+            let valueWi = widthEl + changeBox[i];
+            el.style.width = valueWi;
+            i++;
+        
+    });
+    // for (let i = 0; i <= 3; i++) {
 
-function popListTravailleur(nbPrs) {
+    //     let widthEl = allRangeDiv[i].style.width;
+    //     console.log(widthEl);
+    //     widthEl = parseInt(widthEl, 10);
+    //     console.log(widthEl);
+    //     let valueWi = widthEl + changeBox[i];
+    //     allRangeDiv[i].style.width = 50 + '%';
+    //     console.log(allRangeDiv[i].style.width);
+    //     localStorage.setItem(titleRange[i] + 'width', widthEl + changeBox[i]);
 
-    let boxPopup = document.createElement('div');
-    boxPopup.classList.add('popup__Travail');
-    document.body.appendChild(boxPopup);
-
-    let textBoxPopUp = document.createElement('p');
-    textBoxPopUp.classList.add('popup__txtTravail');
-    textBoxPopUp.textContent = 'Travailleur :   ';
-    boxPopup.appendChild(textBoxPopUp);
-
-    let textNbPerso = document.createElement('p');
-    textNbPerso.classList.add('popup__txtTravail--big');
-    textNbPerso.textContent = nbPrs + ' / 4';
-    boxPopup.appendChild(textNbPerso);
+    // }
 }
+
 
 function verifTravailSecteur() {
     let classPerso = localStorage.getItem('class');

@@ -6,12 +6,13 @@ import logoutMethod from '../scripts/components/logout';
 import db, { auth } from './firebase';
 import { login, logout, dataUser } from './storeManage/userStore';
 import { store } from '../app/store';
-import { profil } from './storeManage/userDataStore';
+import { dataJob, profil } from './storeManage/userDataStore';
 import { collection, onSnapshot, setDoc, doc, query, addDoc, serverTimestamp } from 'firebase/firestore';
 import popUpInfo from './components/popupcreacompte';
 import navNiveau from './components/NiveauNavJeux';
 import boxChoice from './components/boxChoiceUser';
 import actionPerso from './components/ActionPerso';
+import suivisTravail from './components/TravailGames';
 
 document.querySelector('.nav__button').addEventListener('click', (e) => {
 
@@ -30,16 +31,16 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
                         email: autUser.email,
                         displayName: autUser.displayName
                     })
-                    
+
                 ),
-                console.log(autUser.email);
-                
+                    console.log(autUser.email);
+
             } else {
                 store.dispatch(
                     logout()
                 )
             }
-            
+
         });
         console.log(store.getState());
         const user = store.getState().user;
@@ -52,38 +53,65 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
 });
 
 
-document.querySelector('#clickme').addEventListener('click', ()=>{
-    
-    setDoc(doc(db, 'users', store.getState().user.user.uid),{
-        name : 'lololl'
+document.querySelector('#clickme').addEventListener('click', () => {
+
+    setDoc(doc(db, 'users', store.getState().user.user.uid), {
+        name: 'lololl'
     })
     // recupère la data 
-    onSnapshot(collection(db,'users'), (snapshot) =>{
+    onSnapshot(collection(db, 'works'), (snapshot) => {
         store.dispatch(
             profil(
-                snapshot.docs.map((doc) =>({
+                snapshot.docs.map((doc) => ({
                     id: doc.id,
-                    channel : doc.data(),
+                    channel: doc.data(),
                 }))
-            )
+            ),
+            
         )
     })
+    onSnapshot(collection(db, 'works',store.getState().user.user.uid, 'enCours'), (snapshot) => {
+        store.dispatch(
+            dataJob(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    statut: doc.data()
+
+                }))
+            )
+            
+        )
+    })
+    onSnapshot(collection(db, 'works','mine', 'enCours'), (snapshot) => {
+        store.dispatch(
+            dataJob(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    statut: doc.data()
+
+                }))
+            )
+            
+        )
+    })
+    console.log(store.getState().dataPerso.dataUser);
 });
 
-document.querySelector('#addData').addEventListener('click', ()=>{
-    
+document.querySelector('#addData').addEventListener('click', () => {
+
     console.log('je suis les données ');
     ///
     //ajoute un document dans un élément de user 
-    addDoc(collection(db, "users", store.getState().dataPerso.dataUser[0].id, 'datahub'), {
-        timestamp : serverTimestamp(),
-        data : 'je suis une chèvre ',
-        user : store.getState().user.user.displayName
-    })
+    // addDoc(collection(db, "users", store.getState().dataPerso.dataUser[0].id, 'datahub'), {
+    //     timestamp : serverTimestamp(),
+    //     data : 'je suis une chèvre ',
+    //     user : store.getState().user.user.displayName
+    // })
     //crée un document 
     // setDoc(doc(db, 'users', 'nain', 'data01'),{
     //     name : 'lololl'
     // })
+    suivisTravail();
 })
 
 navNiveau()
@@ -101,11 +129,22 @@ actionPerso();
 
 
 //// code de jean //
-"use strict";
 
 // capacité selon la classe du user
-const classes = ['géologue', 'bucheron', 'mineur', 'fermier']
-const userClass = classes[1]
+const classes = ['caristes', 'bucherons','capital', 'mineurs', 'Paysans']
+if (localStorage.getItem('class')){
+    if(localStorage.getItem('class') === 'Paysans'){
+        var userClass = 4
+    }else if(localStorage.getItem('class') === 'mineurs'){
+        var userClass = 3
+    }else if(localStorage.getItem('class') === 'bucherons'){
+        var userClass = 1
+    }else if(localStorage.getItem('class') === 'caristes'){
+        var userClass = 0
+    }
+    var userClass = classes[userClass];
+}
+
 
 
 // nav et slider
@@ -212,6 +251,3 @@ for (let u = 0; u < détenteHover.length; u++) {
     }
 }
 
-document.querySelector('#btnActionPrincipal').addEventListener('click', ()=>{
-    console.log('btn');
-})

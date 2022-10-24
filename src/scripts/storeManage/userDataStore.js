@@ -23,4 +23,5 @@ export const userDataSlice = createSlice({
 });
 
 export const {profil, dataJob} = userDataSlice.actions;
+export const dataProfil = (state) => state.dataUser.user;
 export default userDataSlice.reducer; 
