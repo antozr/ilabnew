@@ -1,0 +1,28 @@
+<svg width="1931" height="1301" viewBox="0 0 1931 1301" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path d="M965.275 748.229L482.638 472.234L0 748.229L482.638 1024.22L965.275 748.229Z" fill="#3E3F41"/>
+<path d="M1447.91 1024.51L965.275 748.511L482.638 1024.51L965.275 1300.5L1447.91 1024.51Z" fill="#3E3F41"/>
+<path d="M1447.91 471.953L965.275 195.958L482.638 471.953L965.275 747.947L1447.91 471.953Z" fill="#3E3F41"/>
+<path d="M1930.55 748.229L1447.91 472.234L965.275 748.229L1447.91 1024.22L1930.55 748.229Z" fill="#3E3F41"/>
+<rect x="622.349" width="734.843" height="691.297" fill="url(#pattern0)"/>
+<rect x="107.051" y="471.751" width="749.359" height="506.225" fill="url(#pattern1)"/>
+<rect x="713.07" y="785.647" width="502.596" height="406.432" fill="url(#pattern2)"/>
+<rect x="1121.32" y="471.751" width="580.617" height="431.834" fill="url(#pattern3)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_546_175899" transform="translate(0 -0.000437449) scale(0.000823045 0.000874891)"/>
+</pattern>
+<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image1_546_175899" transform="translate(0 -0.00130578) scale(0.00114025 0.0016879)"/>
+</pattern>
+<pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image2_546_175899" transform="translate(-0.000260137) scale(0.00179305 0.00221729)"/>
+</pattern>
+<pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image3_546_175899" transform="scale(0.00083682 0.00112514)"/>
+</pattern>
+<image id="image0_546_175899" width="1215" height="1144" xlink:href="/assets/arbres.png"/>
+<image id="image1_546_175899" width="877" height="594" xlink:href="/assets/maisons.png"/>
+<image id="image2_546_175899" width="558" height="451" xlink:href="/assets/pubs.png"/>
+<image id="image3_546_175899" width="1195" height="889" xlink:href="/assets/usine--bois.png"/>
+</defs>
+</svg>
