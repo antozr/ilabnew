@@ -134,66 +134,66 @@ document.querySelector('.nav__button').addEventListener('click', (e) => {
 });
 
 
-document.querySelector('#clickme').addEventListener('click', () => {
+// document.querySelector('#clickme').addEventListener('click', () => {
 
-    setDoc(doc(db, 'users', store.getState().user.user.uid), {
-        name: 'lololl'
-    })
-    // recupère la data 
-    onSnapshot(collection(db, 'works'), (snapshot) => {
-        store.dispatch(
-            profil(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    channel: doc.data(),
-                }))
-            ),
+//     setDoc(doc(db, 'users', store.getState().user.user.uid), {
+//         name: 'lololl'
+//     })
+//     // recupère la data 
+//     onSnapshot(collection(db, 'works'), (snapshot) => {
+//         store.dispatch(
+//             profil(
+//                 snapshot.docs.map((doc) => ({
+//                     id: doc.id,
+//                     channel: doc.data(),
+//                 }))
+//             ),
 
-        )
-    })
-    onSnapshot(collection(db, 'works', store.getState().user.user.uid, 'enCours'), (snapshot) => {
-        store.dispatch(
-            dataJob(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    statut: doc.data()
+//         )
+//     })
+//     onSnapshot(collection(db, 'works', store.getState().user.user.uid, 'enCours'), (snapshot) => {
+//         store.dispatch(
+//             dataJob(
+//                 snapshot.docs.map((doc) => ({
+//                     id: doc.id,
+//                     statut: doc.data()
 
-                }))
-            )
+//                 }))
+//             )
 
-        )
-    })
-    onSnapshot(collection(db, 'works', 'mine', 'enCours'), (snapshot) => {
-        store.dispatch(
-            dataJob(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    statut: doc.data()
+//         )
+//     })
+//     onSnapshot(collection(db, 'works', 'mine', 'enCours'), (snapshot) => {
+//         store.dispatch(
+//             dataJob(
+//                 snapshot.docs.map((doc) => ({
+//                     id: doc.id,
+//                     statut: doc.data()
 
-                }))
-            )
+//                 }))
+//             )
 
-        )
-    })
-    console.log(store.getState().dataPerso.dataUser);
-});
+//         )
+//     })
+//     console.log(store.getState().dataPerso.dataUser);
+// });
 
-document.querySelector('#addData').addEventListener('click', () => {
+// document.querySelector('#addData').addEventListener('click', () => {
 
-    console.log('je suis les données ');
-    ///
-    //ajoute un document dans un élément de user 
-    // addDoc(collection(db, "users", store.getState().dataPerso.dataUser[0].id, 'datahub'), {
-    //     timestamp : serverTimestamp(),
-    //     data : 'je suis une chèvre ',
-    //     user : store.getState().user.user.displayName
-    // })
-    //crée un document 
-    // setDoc(doc(db, 'users', 'nain', 'data01'),{
-    //     name : 'lololl'
-    // })
-    suivisTravail();
-})
+//     console.log('je suis les données ');
+//     ///
+//     //ajoute un document dans un élément de user 
+//     // addDoc(collection(db, "users", store.getState().dataPerso.dataUser[0].id, 'datahub'), {
+//     //     timestamp : serverTimestamp(),
+//     //     data : 'je suis une chèvre ',
+//     //     user : store.getState().user.user.displayName
+//     // })
+//     //crée un document 
+//     // setDoc(doc(db, 'users', 'nain', 'data01'),{
+//     //     name : 'lololl'
+//     // })
+//     suivisTravail();
+// })
 suivisTravail();
 navNiveau();
 
